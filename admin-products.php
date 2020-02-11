@@ -25,7 +25,7 @@ $app->get("/admin/products/create", function(){
 	$page = new PageAdmin();
 
 	$page->setTpl("products-create");
-	
+
 });
 
 $app->post("/admin/products/create", function(){
@@ -33,12 +33,14 @@ $app->post("/admin/products/create", function(){
 	User::verifyLogin();
 
 	$product = new Products();
+
 	$product->setData($_POST);
+
 	$product->save();
 
 	header("Location: /admin/products");
 	exit;
-	
+
 });
 
 $app->get("/admin/products/:idproduct", function($idproduct){
@@ -54,7 +56,7 @@ $app->get("/admin/products/:idproduct", function($idproduct){
 	$page->setTpl("products-update", [
 		'product'=>$product->getValues()
 	]);
-	
+
 });
 
 $app->post("/admin/products/:idproduct", function($idproduct){
@@ -71,8 +73,9 @@ $app->post("/admin/products/:idproduct", function($idproduct){
 
 	$product->setPhoto($_FILES["file"]);
 
-	header("Location: /admin/products");
+	header('Location: /admin/products');
 	exit;
+
 });
 
 $app->get("/admin/products/:idproduct/delete", function($idproduct){
@@ -85,9 +88,9 @@ $app->get("/admin/products/:idproduct/delete", function($idproduct){
 
 	$product->delete();
 
-	header("Location: /admin/products");
+	header('Location: /admin/products');
 	exit;
-	
+
 });
 
 
